@@ -1,0 +1,16 @@
+#ignore files in out folder
+out/
+obj/
+bin/
+Backups/
+Migrations/
+node_module
+/.DS_Store
+/.vscode
+/.config
+.config/
+*.swp
+mono_crash.*
+*.pem
+*.asc
+

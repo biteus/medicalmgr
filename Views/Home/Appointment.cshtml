@@ -1,0 +1,109 @@
+@model Appointment
+
+@{
+    ViewBag.Title = "Add Appointment";
+}
+
+<form asp-controller="Home" asp-action="Appointment" method="post" class="mt-3">
+    <h2>Enter Appointment Information</h2>
+    <div class="form-group row">
+        <label asp-for="Name" class="col-sm-2 col-form-label">Doctor Name</label>
+        <div class="col-sm-8">
+            <input asp-for="Name" class="form-control" placeholder="Doctor or Medical Personal Reference" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+            <label asp-for="Location" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-1">
+                <div class="form-group">
+                    <label asp-for="Suite">Suite</label>
+                    <input asp-for="Suite" class="form-control" />
+                    <span asp-validation-for="Suite" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label asp-for="Street"></label>
+                    <input asp-for="Street" class="form-control" />
+                    <span asp-validation-for="Street" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label asp-for="City"></label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <div class="form-group">
+                    <label asp-for="Zip"></label>
+                    <input asp-for="Zip" class="form-control" />
+                    <span asp-validation-for="Zip" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <div class="form-group">
+                    <label asp-for="Country"></label>
+                    <input asp-for="Country" class="form-control" />
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-2" style="background-color:none;"></div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Schedule</label>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label asp-for="Scheduled">Date</label>
+                    <input asp-for="Scheduled" class="form-control" />
+                    <span asp-validation-for="Scheduled" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                        <label asp-for="AppointmentType">Reason/Category</label>
+                        <select asp-for="AppointmentType"
+                    asp-items="Html.GetEnumSelectList<AppointmentType>()" class="select-button"></select>
+                    <span asp-validation-for="AppointmentType" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label asp-for="FirstReminder">Reminder(Days Prior)</label>
+                    <select asp-for="FirstReminder"
+                    asp-items="Html.GetEnumSelectList<ReminderDays>()" class="select-button"></select>
+                    <span asp-validation-for="FirstReminder" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <div class="form-group">
+                        <label asp-for="ReminderType">Type</label>
+                        <select asp-for="ReminderType" asp-items="Html.GetEnumSelectList<ReminderType>()" class="select-button"></select>
+                        <span asp-validation-for="ReminderType" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-2" style="background-color:none;"></div>
+        </div>
+        <div class="form-group row">
+        <label asp-for="Notes" class="col-sm-2 col-form-label">Notes</label>
+        <div class="col-sm-8">
+            <input asp-for="Notes" class="form-control" placeholder="Additional Notes" />
+            <span asp-validation-for="Notes" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div asp-validation-summary="All" , class="text-danger"></div>
+    <div class="row ">
+        <div class="col-sm-2" style="background-color:none;"></div>
+        <div class="col-sm-8" style="background-color:none;">
+            <button type="submit" class="btn btn-success btn-sm btn-block">Submit</button>
+            <button type="reset" class="btn btn-secondary btn-sm btn-block">Reset</button>
+            <button type="submit" class="btn btn-dark btn-sm btn-block">Cancel</button>
+        </div>
+    </div>
+</form>

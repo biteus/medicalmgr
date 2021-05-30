@@ -1,0 +1,85 @@
+﻿@model BloodPressureListViewModel
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    ViewData["Title"] = "Blood Pressure Graph";
+    var user = await UserManager.GetUserAsync(User);
+}
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+@if (SignInManager.IsSignedIn(User) && Model != null)
+{
+    <div>
+        <figure class="highcharts-figure">
+        <div id="container"></div>
+        <p class="highcharts-description">
+            The Bloodpressure Chat:<span style="color:limegreen">@user.Firstname, @user.Lastname.</span>
+        </p>
+        </figure>
+
+        <script>
+            var dataChartSystolic = [];
+            var dataChartDiastolic = [];
+            var dataChartTimeStamp = [];
+
+            var json = @Json.Serialize(@Model.Systolic);
+            json.forEach(
+                e => dataChartSystolic.push(e)
+            );
+            var json = @Json.Serialize(@Model.Diastolic);
+	        json.forEach(
+                e => dataChartDiastolic.push(e)
+            );
+            var json = @Json.Serialize(@Model.ReadingTime);
+	        json.forEach(
+                e => dataChartTimeStamp.push(e.toString())
+            );
+
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Blood Pressure Reading (Systolic, Diastolic)'
+                },
+                subtitle: {
+                    text: '@user.Firstname, @user.Lastname Blood Pressure vs. Time Stamp'
+                },
+                xAxis: {
+                    categories: dataChartTimeStamp
+                },
+                yAxis: {
+                    title: {
+                        text: 'mm Hg'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series: [{
+                    name: 'Systolic',
+                    data: dataChartSystolic
+                }, {
+                        name: 'Diastolic',
+                        data: dataChartDiastolic
+                }]
+            });
+
+        </script>
+    </div>
+}
+
+

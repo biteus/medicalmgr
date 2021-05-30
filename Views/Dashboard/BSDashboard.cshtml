@@ -1,0 +1,78 @@
+﻿@model BloodSugarListViewModel
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    ViewData["Title"] = "Blood Sugar Graph";
+    var user = await UserManager.GetUserAsync(User);
+}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+@if (SignInManager.IsSignedIn(User) && Model != null)
+{
+    <div>
+        <figure class="highcharts-figure">
+            <div id="container"></div>
+            <p class="highcharts-description">
+                The Blood Sugar Chat:<span style="color:limegreen">@user.Firstname, @user.Lastname.</span>
+            </p>
+        </figure>
+             
+        <script>
+
+            var dataSugar = [];
+            var dataChartTimeStamp = [];
+
+            var json = @Json.Serialize(@Model.Sugars);
+            json.forEach(
+                e => dataSugar.push(e)
+            );
+            
+            var json = @Json.Serialize(@Model.ReadingTime);
+	        json.forEach(
+                e => dataChartTimeStamp.push(e.toString())
+            );
+            var first_name = '@user.Firstname'.replace(/\w/, c => c.toUpperCase());
+            var last_name = '@user.Lastname'.replace(/\w/, c => c.toUpperCase());
+
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Blood Sugar vs. Time Stamp (' + first_name + ', ' + last_name  + ')'
+                }, 
+                subtitle: {
+                    text: 'Data vs. Day'
+                },
+                xAxis: {
+                   categories: dataChartTimeStamp   
+                   },
+                yAxis: {
+                    title: {
+                        text: 'mg/dl'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series: [{
+                    name: 'Sugar',
+                    data: dataSugar
+                }]
+            });
+        </script>
+    </div>
+}
+
+

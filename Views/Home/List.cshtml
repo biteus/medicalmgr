@@ -1,0 +1,68 @@
+﻿@model MedicationListViewModel
+
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    ViewData["Title"] = Model.Title;
+    var user = await UserManager.GetUserAsync(User);
+    var rowIndex = 0;
+}
+
+@if (SignInManager.IsSignedIn(User) && Model != null)
+{
+<h4 align="Center"> Current Medication List (@user.Firstname @user.Lastname)</h4>
+
+}
+
+<div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <div align="center">
+                        <th>Row</th>
+                        <th>Name</th>
+                        <th>Dose</th>
+                        <th>Doctor</th>
+                        <th>Notes</th>
+                    </div>
+                </tr>
+            </thead>
+            @if (SignInManager.IsSignedIn(User) && Model != null)
+            {
+                <tbody>
+                    @foreach (var medication in Model.Medications)
+                    {
+
+                        rowIndex += 1;
+
+                    <tr align="Left">
+                        <td align="center">@rowIndex</td>
+                        <td>
+                            <a href="@Url.Action("Details", "Home", new { id = medication.Id })" class="btn btn-link"><h3>@medication.Name</h3></a>
+                        </td>
+                        <td>
+                            <h4>@medication.Dose</h4>
+                        </td>
+                        <td>
+                            <h4>@medication.Prescriber</h4>
+                        </td>
+                        <td>
+                            <h6>@medication.Notes</h6>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            }
+        </table>
+    </div>
+
+
+
+
+</div>
+
+

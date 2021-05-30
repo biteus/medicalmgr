@@ -1,0 +1,32 @@
+﻿@Model HomeDetailsViewModel
+
+@{
+    ViewBag.Title = "Medication Delete";
+}
+
+<div class="row justify-content-center m-3">
+    
+    <div class="col-sm-8">
+        
+        <h2>The Following Medication Successfully Deleted</h2>
+        <div clss="card">
+            <div class="card-header">
+                <h1>@Model.Medication.Name</h1>
+            </div>
+            <div class="card-body text-center">
+                <img class="card-img-top" src="~/images/medical-img01.jpg" />
+                <h4>Dose: @Model.Medication.Dose</h4>
+                <h4>Time To Take: @Model.Medication.Administer</h4>
+                <h4>Prescription Date: @Model.Medication.Prescribed</h4>
+                <h4>Total Refill: @Model.Medication.Refills</h4>
+                <h4>Doctor Name: @Model.Medication.Prescriber</h4>
+            </div>
+            <div class="card-footer text-center">
+                <a href="@Url.Action("Create", "Home")" class="btn btn-primary">Add</a>>
+                <a href="@Url.Action("List", "Home")" class="btn btn-info">Back</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>

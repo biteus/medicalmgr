@@ -1,0 +1,40 @@
+﻿@using Microsoft.EntityFrameworkCore.Infrastructure
+@model AppointmentDetailsViewModel
+@{
+    var pageTitle = @Model.Title;
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-center m-3">
+    
+    <div class="col-sm-8">
+        
+        <div clss="card">
+            <div class="card-header">
+                <h1>@Model.Appointment.Name</h1>
+            </div>
+            <div class="card-body text-center">
+                <h4>Date: @Model.Appointment.Scheduled</h4>
+                <h4>Suite: @Model.Appointment.Suite</h4>
+                <h4>Street: @Model.Appointment.Street</h4>
+                <h4>City, State: @Model.Appointment.City</h4>
+                <h4>Country Code: @Model.Appointment.Country</h4>
+                <h4>Reason: @Model.Appointment.AppointmentType</h4>
+                <h4>Reminder: @Model.Appointment.FirstReminder</h4>
+                <h4>Commuication Media: @Model.Appointment.ReminderType</h4>
+                <h4>Notes: @Model.Appointment.Notes</h4>
+
+            </div>
+            <div class="card-footer text-center">
+                <a href="@Url.Action("Appointment", "Home")" class="btn btn-success">Add</a>
+                <a href="@Url.Action("AppointmentEdit", "Home", new { id = @Model.Appointment.Id })" class="btn btn-primary">Edit</a>
+                <a href="@Url.Action("AppointmentList", "Home")" class="btn btn-info">List</a>
+                <a href="@Url.Action("AppointmentDelete", "Home", new { id = @Model.Appointment.Id })" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>

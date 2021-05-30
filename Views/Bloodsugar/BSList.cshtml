@@ -1,0 +1,60 @@
+﻿@model BloodSugarListViewModel
+
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    ViewData["Title"] = Model.Title;
+    var user = await UserManager.GetUserAsync(User);
+    var rowIndex = 0;
+}
+
+@if (SignInManager.IsSignedIn(User) && Model != null)
+{
+<h4 align="Center"> Blood Sugar Readings.. (@user.Firstname @user.Lastname)</h4>
+
+}
+
+<div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <div align="center">
+                        <th>Row</th>
+                        <th>Date</th>
+                        <th>Sugar (mg/dl)</th>
+                        <th>Notes</th>
+                    </div>
+                </tr>
+            </thead>
+            @if (SignInManager.IsSignedIn(User) && Model != null)
+            {
+                <tbody>
+                    @foreach (var bsreading in Model.BloodSugars)
+                    {
+
+                        rowIndex += 1;
+
+                    <tr align="Left">
+                        <td align="center">@rowIndex</td>
+                        <td>
+                            <a href="" class="btn btn-link"><h3>@bsreading.ReadingDate</h3></a>
+                        </td>
+                        <td>
+                            <h4>@bsreading.Sugar</h4>
+                        </td>
+                        <td>
+                            <h6>@bsreading.Notes</h6>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            }
+        </table>
+    </div>
+</div>
+
+

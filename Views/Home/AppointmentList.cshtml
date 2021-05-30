@@ -1,0 +1,77 @@
+﻿@model AppointmentListViewModel
+
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    ViewData["Title"] = Model.Title;
+    var user = await UserManager.GetUserAsync(User);
+    var rowIndex = 0;
+}
+
+@if (SignInManager.IsSignedIn(User) && Model != null)
+{
+    <h4 align="Center"> Upcomming Appointments for (@user.Firstname @user.Lastname)</h4>
+}
+
+<div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <div align="center">
+                        <th>Row</th>
+                        <th>Doctor</th>
+                        <th>Date</th>
+                        <th>Location</th>
+                        <th>Type</th>
+                        <th>Days Left</th>
+                        <th>Notes</th>
+                    </div>
+                </tr>
+            </thead>
+            @if (SignInManager.IsSignedIn(User) && Model != null)
+            {
+                <tbody>
+                    @foreach (var appointment in Model.Appointments)
+                    {
+
+                        rowIndex += 1;
+
+                    <tr align="Left">
+                        <td align="center">@rowIndex</td>
+                        <td>
+                            <a href="@Url.Action("AppointmentDetails", "Home", new { id = appointment.Id })" class="btn btn-link"><h3>@appointment.Name</h3></a>
+                        </td>
+                        <td>
+                            <h4>@appointment.Scheduled</h4>
+                        </td>
+                        <td>
+                            <h4>@appointment.Suite @appointment.Street @appointment.City @appointment.Zip</h4>
+                        </td>
+                        <td>
+                            <h4>@appointment.AppointmentType</h4>
+                        </td>
+                        <td>
+                            <h4 style="@(Int32.Parse(appointment.Days) <= 1 ? "Background-color:red" : "")">
+                                @appointment.Days
+                            </h4>
+                        </td>
+                        <td>
+                            <h6>@appointment.Notes</h6>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            }
+        </table>
+    </div>
+
+
+
+
+</div>
+
+

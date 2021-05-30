@@ -1,0 +1,86 @@
+﻿@model BloodSugar
+
+@{
+    ViewBag.Title = "Add Blood Sugar";
+}
+
+<div class="row">
+    <form asp-controller="Bloodsugar" asp-action="BSCreate" method="post" class="mt-3">
+        <h4>Enter Blood Sugar Reading</h4>
+        <div asp-validation-summary="All" , class="text-danger"></div>
+        <div class="row ">
+            <div class="col-sm-2" style="background-color:none;"></div>
+            <div class="col-sm-6">
+                <img src="~/img/Chart_BS.jpg" alt="Blood  Pressure Chart" width="400" height="300">
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-sm-2" style="background-color:none;"></div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label asp-for="Sugar">Blood Sugar</label>
+                    <input asp-for="Sugar" class="form-control" />
+                    <span asp-validation-for="Sugar" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label asp-for="ReadingDate"></label>
+                    <input asp-for="ReadingDate" class="form-control" />
+                    <span asp-validation-for="ReadingDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label asp-for="Administor"></label>
+                    <input asp-for="Administor" class="form-control" />
+                    <span asp-validation-for="Administor" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-2" style="background-color:none;"></div>
+        </div>
+        @* <div class="row ">
+            <div class="col-sm-2" style="background-color:none;"></div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label asp-for="ReadingDate"></label>
+                    <input asp-for="ReadingDate" class="form-control" />
+                    <span asp-validation-for="ReadingDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label asp-for="Administor"></label>
+                    <input asp-for="Administor" class="form-control" />
+                    <span asp-validation-for="Administor" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-2" style="background-color:none;"></div>
+        </div> *@
+
+        <div class="row ">
+            <div class="col-sm-2" style="background-color:none;"></div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="Notes"></label>
+                    <input asp-for="Notes" class="form-control" />
+                    <span asp-validation-for="Notes" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-2" style="background-color:none;"></div>
+        </div>
+
+
+        <div class="row ">
+            <div class="col-sm-2" style="background-color:none;"></div>
+            <div class="col-sm-6" style="background-color:none;">
+                <button type="submit" class="btn btn-success btn-sm btn-block">Submit</button>
+                <button type="reset" class="btn btn-secondary btn-sm btn-block">Reset</button>
+                <button type="button" class="btn btn-dark btn-sm btn-block">Cancel</button>
+                <button type="button" class="btn btn-info btn-sm btn-block"><a href="@Url.Action("BSList", "Blood Sugar")"><span>List</span></a></button>
+                @*<a href="@Url.Action("BPList", "Bloodpressure")" class="btn btn-info btn-sm">List</a>*@
+            </div>
+            <div class="col-sm-2" style="background-color:none;"></div>
+        </div>
+    </form>

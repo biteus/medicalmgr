@@ -1,0 +1,31 @@
+version: "3.0"
+services:
+    web:
+        image:	medical-manager:latest
+        ports:
+            - "8000:80"
+        container_name: web_application
+        depends_on:
+            - medicalmgr
+        logging:
+            driver: awslogs
+            options: 
+                awslogs-group: ClusterMedicalManager
+                awslogs-region: us-east-1
+                awslogs-stream-prefix: web
+
+    
+    medicalmgr:
+        image: "mcr.microsoft.com/mssql/server:2019-latest"
+        environment:
+            SA_PASSWORD: Pw@mm2021
+            ACCEPT_EULA: "Y"
+        ports:
+            - "1433:1433"
+        container_name: mmm_mmsql_2019
+        logging:
+            driver: awslogs
+            options: 
+                awslogs-group: ClusterMedicalManager
+                awslogs-region: us-east-1
+                awslogs-stream-prefix: web

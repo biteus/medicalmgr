@@ -1,0 +1,35 @@
+﻿@Model AppointmentDetailsViewModel
+
+@{
+    ViewBag.Title = "Appointment Delete";
+}
+
+<div class="row justify-content-center m-3">
+    
+    <div class="col-sm-8">
+        
+        <h2>The Following Appointment Successfully Deleted</h2>
+        <div clss="card">
+            <div class="card-header">
+                <h1>@Model.Appointment.Name</h1>
+            </div>
+            <div class="card-body text-center">
+                <h4>Date: @Model.Appointment.Scheduled</h4>
+                <h4>Suite: @Model.Appointment.Suite</h4>
+                <h4>Street: @Model.Appointment.Street</h4>
+                <h4>City, State: @Model.Appointment.City</h4>
+                <h4>Country Code: @Model.Appointment.Country</h4>
+                <h4>Reason: @Model.Appointment.AppointmentType</h4>
+                <h4>Reminder: @Model.Appointment.FirstReminder</h4>
+                <h4>Commuication Media: @Model.Appointment.ReminderType</h4>
+                <h4>Commuication Media: @Model.Appointment.Notes</h4>
+            </div>
+            <div class="card-footer text-center">
+                <a href="@Url.Action("Appointment", "Home")" class="btn btn-primary">Add New</a>
+                <a href="@Url.Action("AppointmentList", "Home")" class="btn btn-info">List</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>

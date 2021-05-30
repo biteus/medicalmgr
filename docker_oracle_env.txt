@@ -1,0 +1,55 @@
+####################################################################
+## Copyright(c) Oracle Corporation 1998,2016. All rights reserved.##
+##                                                                ##
+##                   Docker OL7 db12c dat file                    ##
+##                                                                ##
+####################################################################
+
+##------------------------------------------------------------------
+## Specify the basic DB parameters
+##------------------------------------------------------------------
+
+##ORACLE_SYS_USER=sys
+##ORACLE_SYS_PASSWORD=Oradoc_db1
+##ORACLE_PDB=ORCLPDBTEST1
+##ORACLE_DATABASE=tstoracle
+##ORACLE_USER=tstusr
+##ORACLE_PASSWORD=tstpw
+##ORACLE_BUNDLE=basic
+##ORACLE_DOMAIN=TESTlocaldomain
+
+
+##ORACLE_SID=ORCLTEST
+##ORACLE_PDB=ORCLTEST1
+##ORACLE_PWD=tstpw
+##ORACLE_CHARACTERSET=tstusr
+##ORACLE_BUNDLE=basic
+##ORACLE_DOMAIN=TESTlocaldomain
+
+
+
+
+## db sid (name)
+## default : TESTORCL
+## cannot be longer than 8 characters
+
+#DB_SID=ORCLTEST
+
+## db passwd
+## default : Oracle
+
+#DB_PASSWD=oracle
+
+## db domain
+## default : localdomain
+
+#DB_DOMAIN=TESTlocaldomain
+
+## db bundle
+## default : basic
+## valid : basic / high / extreme
+## (high and extreme are only available for enterprise edition)
+
+#DB_BUNDLE=basic
+
+## end$
