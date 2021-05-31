@@ -42,7 +42,7 @@ namespace MedicalManager
             SqlConnectionStringBuilder builder =
             new SqlConnectionStringBuilder(connectionStr);
             builder.UserID="medicalmgradmin";
-            builder.Password="admin2021";
+            builder.Password="";
             var connection =  builder.ConnectionString;
             services.AddDbContext<MedicalManagerDBContext>(
                 options => options.UseSqlServer(connection)
